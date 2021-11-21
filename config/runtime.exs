@@ -15,7 +15,7 @@ if config_env() == :prod do
       """
 
   config :giftify, Giftify.Repo,
-    # ssl: true,
+    ssl: true,
     # socket_options: [:inet6],
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
@@ -33,6 +33,7 @@ if config_env() == :prod do
       """
 
   config :giftify, GiftifyWeb.Endpoint,
+    server: true,
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
@@ -41,6 +42,7 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: String.to_integer(System.get_env("PORT") || "4000")
     ],
+    url: [host: System.get_env("APP_NAME") <> ".gigalixirapp.com", port: 443],
     secret_key_base: secret_key_base
 
   # ## Using releases

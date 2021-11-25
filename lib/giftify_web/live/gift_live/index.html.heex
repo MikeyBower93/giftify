@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th> 
+    </tr>
+  </thead>
+  <tbody id="gifts">
+    <%= for gift <- @gifts do %>
+      <tr id={"gift-#{gift.id}"}>
+        <td><%= gift.name %></td>
+        <td><%= gift.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+ 
+<.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+
+  <%= label f, :price %>
+  <%= number_input f, :price %>
+  <%= error_tag f, :price %>
+
+  <%= submit "Save" %>
+</.form> 

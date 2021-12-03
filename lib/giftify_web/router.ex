@@ -19,8 +19,6 @@ defmodule GiftifyWeb.Router do
 
   scope "/", GiftifyWeb do
     pipe_through :browser
-
-    get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
@@ -78,7 +76,9 @@ defmodule GiftifyWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    live "/my-gifts", GiftLive.Index, :index
+    # In the future, we will create a high level wrapper that is more of a dashboard style
+    # approach.
+    live "/", GiftLive.Index, :index
   end
 
   scope "/", GiftifyWeb do

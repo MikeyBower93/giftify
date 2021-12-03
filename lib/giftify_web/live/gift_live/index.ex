@@ -9,14 +9,11 @@ defmodule GiftifyWeb.GiftLive.Index do
   @impl true
   def mount(_params, session, socket) do
     socket =
-      assign_new(socket, :current_user, fn ->
+      socket
+      |> assign_new(:current_user, fn ->
         find_current_user(session)
       end)
-
-    socket =
-      socket
-      |> assign(:gifts, list_gifts(socket.assigns.current_user))
-      |> assign(:changeset, Gift.changeset(%Gift{}, %{}))
+      |> initialise_form()
 
     {:ok, socket}
   end
@@ -37,21 +34,28 @@ defmodule GiftifyWeb.GiftLive.Index do
 
     case UserInventory.create_gift(params) do
       {:ok, _gift} ->
-        {:noreply,
-         socket
-         |> assign(:gifts, list_gifts(socket.assigns.current_user))
-         |> assign(:changeset, Gift.changeset(%Gift{}, %{}))}
+        {:noreply, initialise_form(socket)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
 
+  # Functions that deal with live view code
+
   defp find_current_user(session) do
     with user_token when not is_nil(user_token) <- session["user_token"],
          %User{} = user <- Accounts.get_user_by_session_token(user_token),
          do: user
   end
+
+  defp initialise_form(socket) do
+    socket
+    |> assign(:gifts, list_gifts(socket.assigns.current_user))
+    |> assign(:changeset, Gift.changeset(%Gift{}, %{}))
+  end
+
+  # Abstract/logical functions
 
   defp list_gifts(current_user) do
     UserInventory.list_owners_gifts(current_user.id)

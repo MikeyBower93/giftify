@@ -10,9 +10,7 @@ defmodule GiftifyWeb.GiftLive.Index do
   def mount(_params, session, socket) do
     socket =
       socket
-      |> assign_new(:current_user, fn ->
-        find_current_user(session)
-      end)
+      |> assign_user(session)
       |> initialise_form()
 
     {:ok, socket}
@@ -47,6 +45,12 @@ defmodule GiftifyWeb.GiftLive.Index do
     with user_token when not is_nil(user_token) <- session["user_token"],
          %User{} = user <- Accounts.get_user_by_session_token(user_token),
          do: user
+  end
+
+  def assign_user(socket, session) do
+    assign_new(socket, :current_user, fn ->
+      find_current_user(session)
+    end)
   end
 
   defp initialise_form(socket) do

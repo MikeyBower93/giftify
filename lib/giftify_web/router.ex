@@ -76,8 +76,6 @@ defmodule GiftifyWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    # In the future, we will create a high level wrapper that is more of a dashboard style
-    # approach.
     live "/", GiftLive.Index, :index
   end
 

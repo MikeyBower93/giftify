@@ -1,4 +1,4 @@
-name: Test and Deploy
+name: Verify and Deploy
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
-    name: Build and verify
+  verify:
+    name: Verify
     runs-on: ubuntu-latest
     services:
       db:
@@ -30,9 +30,10 @@ jobs:
           experimental-otp: true
       - run: mix deps.get
       - run: mix credo
+      - run: mix sobelow
       - run: mix test
   deploy:
-    needs: test
+    needs: verify
     if: github.ref == 'refs/heads/main'
 
     runs-on: ubuntu-latest

@@ -15,6 +15,8 @@ config :giftify, GiftifyWeb.Endpoint, cache_static_manifest: "priv/static/cache_
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :giftify, GiftifyWeb.Endpoint, force_ssl: [http: true]
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

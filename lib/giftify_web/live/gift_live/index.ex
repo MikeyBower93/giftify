@@ -1,10 +1,12 @@
 defmodule GiftifyWeb.GiftLive.Index do
   use GiftifyWeb, :live_view
 
-  alias Giftify.Accounts
-  alias Giftify.Accounts.User
   alias Giftify.UserInventory.Gift
   alias Giftify.UserInventory
+
+  import GiftifyWeb.LiveHelpers
+
+  # ----------- Functions that deal with live view code ----------
 
   @impl true
   def mount(_params, session, socket) do
@@ -39,27 +41,13 @@ defmodule GiftifyWeb.GiftLive.Index do
     end
   end
 
-  # Functions that deal with live view code
-
-  defp find_current_user(session) do
-    with user_token when not is_nil(user_token) <- session["user_token"],
-         %User{} = user <- Accounts.get_user_by_session_token(user_token),
-         do: user
-  end
-
-  def assign_user(socket, session) do
-    assign_new(socket, :current_user, fn ->
-      find_current_user(session)
-    end)
-  end
-
   defp initialise_form(socket) do
     socket
     |> assign(:gifts, list_gifts(socket.assigns.current_user))
     |> assign(:changeset, Gift.changeset(%Gift{}, %{}))
   end
 
-  # Abstract/logical functions
+  # ----------- Abstract/logical functions ----------
 
   defp list_gifts(current_user) do
     UserInventory.list_owners_gifts(current_user.id)

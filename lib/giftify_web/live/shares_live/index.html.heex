@@ -1,0 +1,33 @@
+<h2>My lists</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th> 
+    </tr>
+  </thead>
+  <tbody id="my-lists">
+    <%= for gift <- @my_lists do %>
+      <tr id={"my-#{gift.id}"}>
+        <td><%= gift.name %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Shared lists with me</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th> 
+    </tr>
+  </thead>
+  <tbody id="other-lists">
+    <%= for gift <- @other_lists do %>
+      <tr id={"other-#{gift.id}"}>
+        <td><%= gift.name %></td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>

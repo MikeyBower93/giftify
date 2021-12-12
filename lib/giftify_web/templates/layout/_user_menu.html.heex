@@ -2,7 +2,7 @@
 <%= if @current_user do %>
   <li><%= @current_user.email %></li>
   <li><%= link "My gifts", to: Routes.gift_index_path(@conn, :index) %></li>
-  <li><%= link "Shared lists", to: Routes.user_settings_path(@conn, :edit) %></li>
+  <li><%= link "Shared lists", to: Routes.shares_index_path(@conn, :index) %></li>
   <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
   <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
 <% else %>

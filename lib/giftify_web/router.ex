@@ -77,6 +77,7 @@ defmodule GiftifyWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
     live "/", GiftLive.Index, :index
+    live "/shares", SharesLive.Index, :index
   end
 
   scope "/", GiftifyWeb do

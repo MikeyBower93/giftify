@@ -30,7 +30,7 @@ jobs:
           experimental-otp: true
       - run: mix deps.get
       - run: mix credo
-      - run: mix sobelow
+      - run: mix sobelow --config
       - run: mix test
   deploy:
     needs: verify

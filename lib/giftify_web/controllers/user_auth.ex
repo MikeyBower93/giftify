@@ -1,4 +1,6 @@
 defmodule GiftifyWeb.UserAuth do
+  @moduledoc false
+
   import Plug.Conn
   import Phoenix.Controller
 

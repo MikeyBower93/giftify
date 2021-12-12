@@ -1,4 +1,6 @@
 defmodule GiftifyWeb.SharesLive.Index do
+  @moduledoc false
+
   use GiftifyWeb, :live_view
 
   alias Giftify.Sharing
@@ -15,7 +17,7 @@ defmodule GiftifyWeb.SharesLive.Index do
       |> assign_my_lists()
       |> assign_other_lists()
 
-    {:ok, assign_user(socket, session) }
+    {:ok, assign_user(socket, session)}
   end
 
   defp assign_my_lists(socket) do

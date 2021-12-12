@@ -1,4 +1,6 @@
 defmodule Giftify.Sharing.SharedList do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -9,7 +11,10 @@ defmodule Giftify.Sharing.SharedList do
     field :name, :string
     field :owner_id, :id
 
-    many_to_many :sharees, User, join_through: "shared_list_sharees", on_replace: :delete, join_keys: [shared_list_id: :id, sharee_id: :id]
+    many_to_many :sharees, User,
+      join_through: "shared_list_sharees",
+      on_replace: :delete,
+      join_keys: [shared_list_id: :id, sharee_id: :id]
 
     timestamps()
   end

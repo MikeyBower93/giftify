@@ -1,4 +1,6 @@
 defmodule Giftify.Accounts.UserNotifier do
+  @moduledoc false
+
   import Swoosh.Email
 
   alias Giftify.Mailer

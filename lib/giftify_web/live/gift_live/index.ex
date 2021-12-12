@@ -1,4 +1,6 @@
 defmodule GiftifyWeb.GiftLive.Index do
+  @moduledoc false
+
   use GiftifyWeb, :live_view
 
   alias Giftify.UserInventory.Gift

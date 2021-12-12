@@ -21,7 +21,8 @@ defmodule GiftifyWeb.SharesLiveTest do
     test "Other lists", %{conn: conn, user: user} do
       other_person = user_fixture()
 
-      other_persons_list_shared = shared_list_fixture(owner_id: other_person.id, name: "Other list")
+      other_persons_list_shared =
+        shared_list_fixture(owner_id: other_person.id, name: "Other list")
 
       Sharing.share_list(other_persons_list_shared, user.id)
 

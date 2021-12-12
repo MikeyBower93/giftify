@@ -1,4 +1,6 @@
 defmodule GiftifyWeb.LiveHelpers do
+  @moduledoc false
+
   alias Giftify.Accounts
   alias Giftify.Accounts.User
 

@@ -15,8 +15,8 @@ defmodule Giftify.Sharing do
   def other_lists(sharee_id) do
     Repo.all(
       from list in SharedList,
-      join: sharees in assoc(list, :sharees),
-      where: sharees.id == ^sharee_id
+        join: sharees in assoc(list, :sharees),
+        where: sharees.id == ^sharee_id
     )
   end
 

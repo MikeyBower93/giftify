@@ -86,6 +86,11 @@ header nav ul {
 header nav a {
   display: block;
 }
+ 
+table {
+  display:table;
+  width:100%;
+}
 
 @media (min-width: 40.0rem) { /* Small devices (landscape phones, 576px and up) */
   header section {

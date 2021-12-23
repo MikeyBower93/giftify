@@ -95,8 +95,8 @@ defmodule Giftify.SharingTest do
 
       post_deleted_list = Sharing.get_list(shared_list.id, [:sharees])
 
-      assert length(pre_deleted_list.sharees) == 1
-      assert length(post_deleted_list.sharees) == 0
+      assert Enum.count(pre_deleted_list.sharees) == 1
+      assert Enum.count(post_deleted_list.sharees) == 0
     end
   end
 end

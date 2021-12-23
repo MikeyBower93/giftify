@@ -49,11 +49,11 @@ defmodule GiftifyWeb.SharesLiveTest do
       |> render_submit(%{"create_form" => %{"due" => Date.utc_today(), "name" => "My shiny list"}})
 
       # Renders the live redirect and checks that we have the new item in the list
-      index_live
-      |> render()
-      |> Floki.parse_document!()
-      |> Floki.find("li")
-      |> Enum.any?(fn list_element -> Floki.raw_html(list_element) =~ "My shiny list" end)
+      assert index_live
+             |> render()
+             |> Floki.parse_document!()
+             |> Floki.find("tr")
+             |> Enum.any?(fn list_element -> Floki.raw_html(list_element) =~ "My shiny list" end)
     end
 
     test "Displays form errors", %{conn: conn, user: _user} do

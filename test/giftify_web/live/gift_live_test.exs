@@ -3,7 +3,6 @@ defmodule GiftifyWeb.GiftLiveTest do
 
   import Phoenix.LiveViewTest
   import Giftify.UserInventoryFixtures
-  import Giftify.AccountsFixtures
 
   defp create_gift(owner) do
     gift = gift_fixture(owner_id: owner.id)
@@ -22,14 +21,14 @@ defmodule GiftifyWeb.GiftLiveTest do
       assert html =~ Decimal.to_string(gift.price)
     end
 
-    test "Requires name and a price when creating a gift", %{conn: conn, user: user} do
+    test "Requires name and a price when creating a gift", %{conn: conn, user: _user} do
       {:ok, view, _html} = live(conn, Routes.gift_index_path(conn, :index))
 
       assert render_change(view, "validate", %{gift: %{name: "", price: ""}}) =~
                "can&#39;t be blank"
     end
 
-    test "Creates a gift", %{conn: conn, user: user} do
+    test "Creates a gift", %{conn: conn, user: _user} do
       {:ok, view, _html} = live(conn, Routes.gift_index_path(conn, :index))
 
       updated_html =

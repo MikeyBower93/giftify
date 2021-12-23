@@ -20,6 +20,7 @@ defmodule GiftifyWeb.GiftLive.Index do
     {:ok, socket}
   end
 
+  @impl
   def handle_event("validate", %{"gift" => params}, socket) do
     params = Map.put(params, "owner_id", socket.assigns.current_user.id)
 

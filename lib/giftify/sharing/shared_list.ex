@@ -9,6 +9,7 @@ defmodule Giftify.Sharing.SharedList do
   schema "shared_list" do
     field :active, :boolean, default: false
     field :name, :string
+    field :due, :date
     field :owner_id, :id
 
     many_to_many :sharees, User,
@@ -22,7 +23,14 @@ defmodule Giftify.Sharing.SharedList do
   @doc false
   def changeset(shared_list, attrs) do
     shared_list
-    |> cast(attrs, [:name, :active, :owner_id])
-    |> validate_required([:name, :active, :owner_id])
+    |> cast(attrs, [:name, :due, :owner_id])
+    |> validate_required([:name, :due, :owner_id])
+    |> validate_change(:due, fn :due, due ->
+      if Date.compare(due, Date.utc_today()) == :lt do
+        [due: "Must be after today"]
+      else
+        []
+      end
+    end)
   end
 end

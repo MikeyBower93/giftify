@@ -43,4 +43,8 @@ defmodule Giftify.Sharing do
     |> SharedList.changeset(attrs)
     |> Repo.insert()
   end
+
+  def change_shared_list(shared_list, attrs \\ %{}) do
+    SharedList.changeset(shared_list, attrs)
+  end
 end

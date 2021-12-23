@@ -16,8 +16,20 @@ defmodule GiftifyWeb.SharesLive.Index do
       |> assign_user(session)
       |> assign_my_lists()
       |> assign_other_lists()
+      |> assign(:create_shared_list_enabled, false)
 
-    {:ok, assign_user(socket, session)}
+    {:ok, socket}
+  end
+
+  @impl
+  def handle_params(_params, _uri, socket) do
+    socket =
+      socket
+      |> assign_my_lists()
+      |> assign_other_lists()
+      |> assign(:create_shared_list_enabled, false)
+
+    {:noreply, socket}
   end
 
   defp assign_my_lists(socket) do
@@ -26,5 +38,10 @@ defmodule GiftifyWeb.SharesLive.Index do
 
   defp assign_other_lists(socket) do
     assign(socket, :other_lists, Sharing.other_lists(socket.assigns.current_user.id))
+  end
+
+  @impl
+  def handle_event("create_shared_list", _value, socket) do
+    {:noreply, assign(socket, :create_shared_list_enabled, true)}
   end
 end

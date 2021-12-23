@@ -1,5 +1,14 @@
 <h2>My lists</h2>
 
+<%= if assigns[:create_shared_list_enabled] do %>
+  <%= live_component GiftifyWeb.ModalComponent,
+    id: :modal,
+    title: "Create shared list",
+    return_to: Routes.shares_index_path(@socket, :index),
+    component: GiftifyWeb.SharesLive.CreateSharedListComponent,
+    opts: [id: :create_shared_component, owner_id: @current_user.id]
+  %>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -14,6 +23,8 @@
     <% end %>
   </tbody>
 </table>
+
+<button phx-click="create_shared_list">Create shared list</button>
 
 <h2>Shared lists with me</h2>
 

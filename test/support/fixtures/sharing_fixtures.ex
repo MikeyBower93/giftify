@@ -12,7 +12,8 @@ defmodule Giftify.SharingFixtures do
       attrs
       |> Enum.into(%{
         active: true,
-        name: "some name"
+        name: "some name",
+        due: Date.utc_today()
       })
       |> Giftify.Sharing.create_shared_list()
 

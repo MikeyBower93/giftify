@@ -23,7 +23,7 @@ defmodule Giftify.Sharing.SharedList do
   @doc false
   def changeset(shared_list, attrs) do
     shared_list
-    |> cast(attrs, [:name, :due, :owner_id])
+    |> cast(attrs, [:name, :due, :owner_id, :active])
     |> validate_required([:name, :due, :owner_id])
     |> validate_change(:due, fn :due, due ->
       if Date.compare(due, Date.utc_today()) == :lt do

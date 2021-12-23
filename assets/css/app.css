@@ -87,3 +87,12 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.list_button_td {
+  display: flex; 
+  flex-flow: row-reverse;
+}
+
+.outside_action_button {
+  float: right;
+}

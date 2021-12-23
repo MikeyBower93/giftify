@@ -73,5 +73,47 @@ defmodule GiftifyWeb.SharesLiveTest do
       assert rendered_html =~ "Must be after today"
       assert rendered_html =~ "can&#39;t be blank"
     end
+
+    test "Clicking manage sharees opens modal", %{conn: conn, user: user} do
+      my_list = shared_list_fixture(owner_id: user.id)
+
+      {:ok, index_live, _html} = live(conn, Routes.shares_index_path(conn, :index))
+
+      assert render_click(index_live, :manage_sharees, %{
+               "list-id" => Integer.to_string(my_list.id)
+             }) =~ "manage-sharees-form"
+    end
+
+    test "Adding non existant user blanks form", %{conn: conn, user: user} do
+      my_list = shared_list_fixture(owner_id: user.id)
+
+      {:ok, index_live, _html} = live(conn, Routes.shares_index_path(conn, :index))
+
+      render_click(index_live, :manage_sharees, %{"list-id" => Integer.to_string(my_list.id)})
+
+      rendered_html =
+        index_live
+        |> element("form")
+        |> render_submit(%{
+          "sharee_form" => %{"email" => "non@exist.com"}
+        })
+
+      assert not (rendered_html =~ "non@exist.com")
+    end
+
+    test "Can delete sharee", %{conn: conn, user: user} do
+      my_list = shared_list_fixture(owner_id: user.id)
+      other_person = user_fixture()
+
+      Sharing.share_list(my_list, other_person.id)
+
+      {:ok, index_live, _html} = live(conn, Routes.shares_index_path(conn, :index))
+
+      render_click(index_live, :manage_sharees, %{"list-id" => Integer.to_string(my_list.id)})
+
+      rendered_html = element(index_live, "button", "Remove") |> render_click()
+
+      assert not (rendered_html =~ other_person.email)
+    end
   end
 end

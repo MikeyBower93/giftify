@@ -9,22 +9,38 @@
     opts: [id: :create_shared_component, owner_id: @current_user.id]
   %>
 <% end %>
+
+<%= if assigns[:manage_sharees_enabled] do %>
+  <%= live_component GiftifyWeb.ModalComponent,
+    id: :modal,
+    title: "Manage sharees",
+    return_to: Routes.shares_index_path(@socket, :index),
+    component: GiftifyWeb.SharesLive.ManageShareesComponent,
+    opts: [id: :manage_sharee_component, list_id: @active_shared_list_id]
+  %>
+<% end %>
+
 <table>
   <thead>
     <tr>
       <th>Name</th> 
+      <th></th>
     </tr>
   </thead>
   <tbody id="my-lists">
-    <%= for gift <- @my_lists do %>
-      <tr id={"my-#{gift.id}"}>
-        <td><%= gift.name %></td> 
+    <%= for list <- @my_lists do %>
+      <tr id={"my-#{list.id}"}>
+        <td><%= list.name %></td> 
+        <td class="list_button_td">
+          <button phx-click="manage_sharees" phx-value-list-id={"#{list.id}"}>Manage Sharees</button>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<button phx-click="create_shared_list">Create shared list</button>
+<button class="outside_action_button" phx-click="create_shared_list">Create shared list</button>
+<br/>
 
 <h2>Shared lists with me</h2>
 
@@ -35,9 +51,9 @@
     </tr>
   </thead>
   <tbody id="other-lists">
-    <%= for gift <- @other_lists do %>
-      <tr id={"other-#{gift.id}"}>
-        <td><%= gift.name %></td> 
+    <%= for list <- @other_lists do %>
+      <tr id={"other-#{list.id}"}>
+        <td><%= list.name %></td> 
       </tr>
     <% end %>
   </tbody>

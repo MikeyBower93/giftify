@@ -31,6 +31,7 @@ jobs:
       - run: mix deps.get
       - run: MIX_ENV=test mix compile --warnings-as-errors
       - run: mix credo
+      - run: mix format --check-formatted
       - run: mix sobelow --config
       - run: mix test
   deploy:

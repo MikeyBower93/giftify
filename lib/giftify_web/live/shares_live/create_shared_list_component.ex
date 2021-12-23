@@ -6,6 +6,7 @@ defmodule GiftifyWeb.SharesLive.CreateSharedListComponent do
   alias Giftify.Sharing
   alias Giftify.Sharing.SharedList
 
+  @impl true
   def render(assigns) do
     ~H"""
       <div>
@@ -28,10 +29,12 @@ defmodule GiftifyWeb.SharesLive.CreateSharedListComponent do
     """
   end
 
+  @impl true
   def mount(socket) do
     {:ok, socket}
   end
 
+  @impl true
   def update(assigns, socket) do
     params = %{name: "", due: Date.utc_today(), owner_id: assigns.owner_id}
 
@@ -43,14 +46,14 @@ defmodule GiftifyWeb.SharesLive.CreateSharedListComponent do
     {:ok, socket}
   end
 
-  @impl
+  @impl true
   def handle_event("validate", %{"create_form" => params}, socket) do
     params = Map.put(params, "owner_id", socket.assigns.owner_id)
 
     {:noreply, assign(socket, :changeset, get_changeset(params, :update))}
   end
 
-  @impl
+  @impl true
   def handle_event("save", %{"create_form" => params}, socket) do
     params = Map.put(params, "owner_id", socket.assigns.owner_id)
 

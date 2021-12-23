@@ -21,7 +21,7 @@ defmodule GiftifyWeb.SharesLive.Index do
     {:ok, socket}
   end
 
-  @impl
+  @impl true
   def handle_params(_params, _uri, socket) do
     socket =
       socket
@@ -40,7 +40,7 @@ defmodule GiftifyWeb.SharesLive.Index do
     assign(socket, :other_lists, Sharing.other_lists(socket.assigns.current_user.id))
   end
 
-  @impl
+  @impl true
   def handle_event("create_shared_list", _value, socket) do
     {:noreply, assign(socket, :create_shared_list_enabled, true)}
   end

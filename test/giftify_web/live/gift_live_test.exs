@@ -1,5 +1,5 @@
 defmodule GiftifyWeb.GiftLiveTest do
-  use GiftifyWeb.ConnCase
+  use GiftifyWeb.ConnCase, async: true
 
   import Phoenix.LiveViewTest
   import Giftify.UserInventoryFixtures

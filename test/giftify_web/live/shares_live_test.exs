@@ -1,5 +1,5 @@
 defmodule GiftifyWeb.SharesLiveTest do
-  use GiftifyWeb.ConnCase
+  use GiftifyWeb.ConnCase, async: true
 
   alias Giftify.Sharing
 

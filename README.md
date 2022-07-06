@@ -1,5 +1,8 @@
 # Giftify
 
+## Status
+In progress
+
 ## Introduction
 
 Giftify is a project a came up with at Christmas time. Everybody if my family was trying to communicate
@@ -12,6 +15,9 @@ couldn't be locked from seeing their own sheet. It also wasn't very bespoke and 
 This gave me the idea to create giftify, a website where you can store all the gifts you want. Then create a list
 that is shared with other people, who can then collaborate in realtime to purchase gifts, when the original owner of the
 list cannot see until the deadline (birthday, christmas day etc). 
+
+## Stack
+This is using Elixir/Phoenix/LiveView/Postgres and is hosted in Gigalixir.
 
 ## Setup
 

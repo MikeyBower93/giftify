@@ -1,8 +1,5 @@
 # Giftify
 
-## Status
-In progress
-
 ## Introduction
 
 Giftify is a project a came up with at Christmas time. Everybody if my family was trying to communicate
